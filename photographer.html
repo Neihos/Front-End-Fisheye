@@ -9,14 +9,15 @@
   </head>
   <body>
     <header>
-      <a href="./" aria-label="Fisheye Home page">
-        <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
-      </a>;
+      <a href="/" aria-label="Accueil Fisheye">
+        <img src="assets/images/logo.png" class="logo" alt="" aria-hidden="true" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <div class="photographerContent"></div>
     </main>
     <div id="contact_modal">
 			<div class="modal">
@@ -33,7 +34,8 @@
 				</form>
 			</div>
 		</div>
-    <script src="/scripts/pages/photographer.js"></script>
+    <script src="scripts/templates/photographer.js"></script>
+    <script src="/scripts/pages/photographer.js"></script>    
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
 </html>
