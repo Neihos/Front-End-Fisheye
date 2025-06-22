@@ -137,3 +137,39 @@ form input {
   width: 526px;
   height: 358px;
 }
+
+.photographerContent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 100px;
+  padding: 100px;
+  box-sizing: border-box;
+}
+
+.photographerContent article {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;  
+  color: rgba(144, 28, 28, 1);
+}
+
+.photographerContent article .media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.photographerContent article .likes-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #901c1c;
+}
+
+.photographerContent article .likes-container  .heart-icon {
+  height: 15px;
+}
+

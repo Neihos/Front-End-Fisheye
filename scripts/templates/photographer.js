@@ -11,6 +11,7 @@ function photographerTemplate(data) {
   showTagline.className = "tagline";
   showTagline.textContent = tagline;
 
+  // Méthode de création de la page index
   const getUserCardDOM = () => {
     const article = document.createElement("article");
 
@@ -46,6 +47,7 @@ function photographerTemplate(data) {
     return article;
   }
 
+  // Méthode de création du header de la page photographer
   const makePhotographPage = () => {
     const header = document.querySelector(".photograph-header");
     const info = document.createElement("div");
