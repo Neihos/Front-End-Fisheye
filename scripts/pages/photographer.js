@@ -1,5 +1,6 @@
 import getPhotographers from "../api/api.js";
 import mediaTemplate from "../templates/media.js";
+import photographerTemplate from "../templates/photographer.js";
 
 // On récupére l'id depuis l'url
 const params = new URLSearchParams(window.location.search);
