@@ -1,8 +1,8 @@
-function displayModal() {
-  const modal = document.getElementById("contact_modal");
-  const modalContainer = modal.querySelector(".modal");
-  const main = document.querySelector(".main-content");
+const modal = document.getElementById("contact_modal");
+const modalContainer = modal.querySelector(".modal");
+const main = document.querySelector(".main-content");
 
+function displayModal() {
   modal.style.display = "flex";
   modalContainer.setAttribute("aria-hidden", "false");
   main.setAttribute("inert", ""); // bloque le focus et les interactions sur le reste
@@ -20,13 +20,18 @@ function displayModal() {
   }
 
   closeBtn.focus(); // donne le focus directement à la croix
+  document.addEventListener("keydown", onEscapeKey); // écoute la touche "escape"
+}
+
+// Fermer la modale grâçe à "escape"
+function onEscapeKey(e) {
+  if (e.key === "Escape") {
+    closeModal();
+    document.removeEventListener("keydown", onEscapeKey); // nettoyage
+  }
 }
 
 function closeModal() {
-  const modal = document.getElementById("contact_modal");
-  const modalContainer = modal.querySelector(".modal");
-  const main = document.querySelector(".main-content");
-
   if (document.activeElement && modal.contains(document.activeElement)) {
     document.activeElement.blur(); // retire le focus actif
   }

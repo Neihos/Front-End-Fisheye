@@ -1,6 +1,7 @@
 import getPhotographers from "../api/api.js";
 import mediaTemplate from "../templates/media.js";
 import photographerTemplate from "../templates/photographer.js";
+import { setupLightbox, openLightbox } from "../utils/lightbox.js";
 
 // On récupére l'id depuis l'url
 const params = new URLSearchParams(window.location.search);
@@ -26,10 +27,18 @@ async function displayData(photographers, media) {
       (media) => media.photographerId === photographId
     );
 
-    photographerMedias.forEach((mediaItem) => {
+    photographerMedias.forEach((mediaItem, index) => {
       const mediaModel = mediaTemplate(mediaItem, folderName);
       const mediaCard = mediaModel.getMediaCardDOM();
+
+      mediaCard.querySelector(".media").dataset.index = index;
+
+      mediaCard.querySelector(".media").addEventListener("click", (e) => {
+        openLightbox(index);
+      })
+
       photographersContent.appendChild(mediaCard);
+      console.log(index)
     });
   } else {
     console.error(`Aucun photographe trouvé avec l’ID : ${photographId}`);
