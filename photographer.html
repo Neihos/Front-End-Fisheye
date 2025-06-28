@@ -31,7 +31,10 @@
     <div class="modal" aria-hidden="true" role="dialog">
       <header>
         <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" tabindex="0" alt="Fermer la modale" />
+        <button onclick="closeModal()" aria-label="Fermer la modale">
+          <img src="assets/icons/close.svg" alt="" />
+        </button>
+
       </header>
       <form id="contact_form">
         <div>
@@ -61,12 +64,20 @@
   </div>
 
   <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Vue agrandie du média" tabindex="-1">
-    <button class="lightbox-close" aria-label="Fermer la lightbox">×</button>
-    <div class="lightbox-content">
-      <!-- JS injectera ici l’image ou la vidéo -->
+    <div class="lightbox-container">
+      <div class="lightbox-content">
+        <!-- JS injectera ici l’image ou la vidéo -->
+      </div>
+      <button class="lightbox-close" aria-label="Fermer la lightbox">
+        <img src="assets/icons/cross.svg" alt="" />
+      </button>
+      <button class="lightbox-prev" aria-label="Média précédent">
+        <img src="assets/icons/arrow.svg" alt="" />
+      </button>
+      <button class="lightbox-next" aria-label="Média suivant">
+        <img src="assets/icons/arrow.svg" alt="" />
+      </button>
     </div>
-    <button class="lightbox-prev" aria-label="Média précédent">←</button>
-    <button class="lightbox-next" aria-label="Média suivant">→</button>
   </div>
 
 </body>

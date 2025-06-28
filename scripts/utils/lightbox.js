@@ -3,6 +3,7 @@ import createMediaElement from "../factory/createMediaElement.js";
 let currentMediaIndex = 0;
 let mediaArray = [];
 const lightbox = document.querySelector("#lightbox");
+const main = document.querySelector("main");
 
 export function setupLightbox(medias) {
   mediaArray = medias;
@@ -38,14 +39,24 @@ export function openLightbox(index, folderName) {
     title,
     showControls: true,
   });
+  
   content.appendChild(mediaNow);
 }
 
-export function closeLightbox(){
-  const cross = document.querySelector(".lightbox-close");
-  cross.addEventListener("click", () => {
-    lightbox.style.display = "none";
-    main.removeAttribute("inert"); // rétabli le focus et les interactions sur le reste
-  })
+function hideLightbox() {
+  lightbox.style.display = "none";
+  main.removeAttribute("inert");
 }
+
+export function closeLightbox() {
+  const cross = document.querySelector(".lightbox-close");
+  cross.addEventListener("click", hideLightbox);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      hideLightbox();
+    }
+  });
+}
+
 
