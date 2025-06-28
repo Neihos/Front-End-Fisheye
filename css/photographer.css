@@ -191,6 +191,7 @@ form textarea {
   object-fit: cover;
   display: block;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .photographerContent article .likes-container {
@@ -213,4 +214,16 @@ form textarea {
   position: absolute;
   left: 0;
   background-color: rgba(196, 196, 196, 0.4);
+}
+
+.lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.lightbox-content .media {
+  max-width: 60%;
+  max-height: 80%;
 }

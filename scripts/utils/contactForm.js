@@ -38,7 +38,7 @@ function closeModal() {
 
   modal.style.display = "none";
   modalContainer.setAttribute("aria-hidden", "true");
-  main.removeAttribute("inert");
+  main.removeAttribute("inert"); // rétabli le focus et les interactions sur le reste
   document.body.classList.remove("no-scroll");
 }
 

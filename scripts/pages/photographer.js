@@ -1,6 +1,7 @@
 import getPhotographers from "../api/api.js";
 import mediaTemplate from "../templates/media.js";
 import photographerTemplate from "../templates/photographer.js";
+import { closeLightbox } from "../utils/lightbox.js";
 import { setupLightbox, openLightbox } from "../utils/lightbox.js";
 
 // On récupére l'id depuis l'url
@@ -33,13 +34,16 @@ async function displayData(photographers, media) {
 
       mediaCard.querySelector(".media").dataset.index = index;
 
-      mediaCard.querySelector(".media").addEventListener("click", (e) => {
-        openLightbox(index);
+      mediaCard.querySelector(".media").addEventListener("click", () => {
+        openLightbox(index, folderName);
       })
 
       photographersContent.appendChild(mediaCard);
-      console.log(index)
     });
+
+    setupLightbox(photographerMedias);
+    closeLightbox();
+
   } else {
     console.error(`Aucun photographe trouvé avec l’ID : ${photographId}`);
     photographersContent.innerHTML = `<p class="error-message">Photographe introuvable.</p>`;

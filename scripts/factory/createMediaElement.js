@@ -3,7 +3,7 @@
  * @param {object} data - { type: 'image' | 'video', src: string, title: string }
  * @returns {HTMLElement}
  */
-export default function createMediaElement({ type, src, title }) {
+export default function createMediaElement({ type, src, title, showControls = false }) {
   let mediaElement;
 
   if (type === "image") {
@@ -14,6 +14,9 @@ export default function createMediaElement({ type, src, title }) {
     mediaElement = document.createElement("video");
     mediaElement.setAttribute("src", src);
     mediaElement.setAttribute("aria-label", title);
+    if (showControls) {
+      mediaElement.setAttribute("controls", "");
+    }
   } else {
     throw new Error(`Type de média non supporté : ${type}`);
   }
