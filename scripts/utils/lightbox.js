@@ -5,14 +5,42 @@ let mediaArray = [];
 const lightbox = document.querySelector("#lightbox");
 const main = document.querySelector("main");
 
-export function setupLightbox(medias) {
+function hideLightbox() {
+  lightbox.style.display = "none";
+  main.removeAttribute("inert");
+  document.body.classList.remove("no-scroll");
+}
+
+function onKeydown(e) {
+  if (e.key === "Escape") hideLightbox();
+}
+
+export function setupLightbox(medias, folderName) {
   mediaArray = medias;
+  const cross = document.querySelector(".lightbox-close");
+  cross.addEventListener("click", hideLightbox);
+  document.addEventListener("keydown", onKeydown);
+
+  const arrowPrev = document.querySelector(".lightbox-prev");
+  arrowPrev.addEventListener("click", () => {
+    currentMediaIndex =
+      (currentMediaIndex - 1 + mediaArray.length) % mediaArray.length;
+    openLightbox(currentMediaIndex, folderName);
+  });
+
+  const arrowNext = document.querySelector(".lightbox-next");
+  arrowNext.addEventListener("click", () => {
+    currentMediaIndex = (currentMediaIndex + 1) % mediaArray.length;
+    openLightbox(currentMediaIndex, folderName);
+  });
+
 }
 
 export function openLightbox(index, folderName) {
   currentMediaIndex = index;
   lightbox.style.display = "flex";
   main.setAttribute("inert", ""); // bloque le focus et les interactions sur le reste
+  document.body.classList.add("no-scroll");
 
   const content = lightbox.querySelector(".lightbox-content");
   const mediaLightbox = mediaArray[currentMediaIndex];
@@ -38,25 +66,10 @@ export function openLightbox(index, folderName) {
     src: mediaSrc,
     title,
     showControls: true,
+    showCloseupView: true
   });
   
   content.appendChild(mediaNow);
+
+  
 }
-
-function hideLightbox() {
-  lightbox.style.display = "none";
-  main.removeAttribute("inert");
-}
-
-export function closeLightbox() {
-  const cross = document.querySelector(".lightbox-close");
-  cross.addEventListener("click", hideLightbox);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      hideLightbox();
-    }
-  });
-}
-
-

@@ -3,13 +3,18 @@
  * @param {object} data - { type: 'image' | 'video', src: string, title: string }
  * @returns {HTMLElement}
  */
-export default function createMediaElement({ type, src, title, showControls = false }) {
+export default function createMediaElement({ type, src, title, showControls = false, showCloseupView = false }) {
   let mediaElement;
 
   if (type === "image") {
     mediaElement = document.createElement("img");
     mediaElement.setAttribute("src", src);
-    mediaElement.setAttribute("alt", title);
+    if (showCloseupView) {
+      mediaElement.setAttribute("alt", title);
+    } else {
+      mediaElement.setAttribute("alt", `${title}, closeup view`);
+    }
+    
   } else if (type === "video") {
     mediaElement = document.createElement("video");
     mediaElement.setAttribute("src", src);

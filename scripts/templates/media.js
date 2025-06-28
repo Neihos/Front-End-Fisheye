@@ -26,7 +26,7 @@ export default function mediaTemplate(mediaData, folderName) {
 
     const heartElement = document.createElement("img");
     heartElement.setAttribute("src", heartIconSrc);
-    heartElement.setAttribute("alt", "J’aime");
+    heartElement.setAttribute("alt", "likes");
     heartElement.className = "heart-icon";
 
     likesContainer.appendChild(likesElement);

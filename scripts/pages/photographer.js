@@ -1,8 +1,8 @@
 import getPhotographers from "../api/api.js";
 import mediaTemplate from "../templates/media.js";
 import photographerTemplate from "../templates/photographer.js";
-import { closeLightbox } from "../utils/lightbox.js";
 import { setupLightbox, openLightbox } from "../utils/lightbox.js";
+import { calcLikes } from "../templates/photographerInfos.js";
 
 // On récupére l'id depuis l'url
 const params = new URLSearchParams(window.location.search);
@@ -19,14 +19,16 @@ async function displayData(photographers, media) {
   if (photographer) {
     const folderName = photographer.name.split(" ")[0];
 
-    const photographerModel = photographerTemplate(photographer);
-    photographerModel.makePhotographPage();
-
-    makeModal(photographer);
-
     const photographerMedias = media.filter(
       (media) => media.photographerId === photographId
     );
+
+    const total = calcLikes(photographerMedias);
+
+    const photographerModel = photographerTemplate(photographer);
+    photographerModel.makePhotographPage(total);
+
+    makeModal(photographer);
 
     photographerMedias.forEach((mediaItem, index) => {
       const mediaModel = mediaTemplate(mediaItem, folderName);
@@ -36,14 +38,18 @@ async function displayData(photographers, media) {
 
       mediaCard.querySelector(".media").addEventListener("click", () => {
         openLightbox(index, folderName);
-      })
+      });
+
+      mediaCard.querySelector(".media").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          openLightbox(index, folderName);
+        }
+      });
 
       photographersContent.appendChild(mediaCard);
     });
 
-    setupLightbox(photographerMedias);
-    closeLightbox();
-
+    setupLightbox(photographerMedias, folderName);
   } else {
     console.error(`Aucun photographe trouvé avec l’ID : ${photographId}`);
     photographersContent.innerHTML = `<p class="error-message">Photographe introuvable.</p>`;

@@ -1,6 +1,6 @@
 // Méthode de création du header de la page photographer
-export default function makePhotographPage(data) {
-  const { name, portrait, city, country, tagline, id } = data;
+export function makePhotographPage(data, totalLikes) {
+  const { name, portrait, city, country, tagline, price, id } = data;
   const picture = `./assets/photographers/${portrait}`;
 
   const header = document.querySelector(".photograph-header");
@@ -26,10 +26,25 @@ export default function makePhotographPage(data) {
   img.setAttribute("src", picture);
   img.setAttribute("alt", `${name}`);
 
+  const bottomPrice = document.querySelector(".price");
+  bottomPrice.innerHTML = `${price}€ / jour`;
+
+  const showTotalLikes = document.querySelector(".total-likes");
+  showTotalLikes.innerHTML = `${totalLikes} <img src="assets/icons/blackheart.svg" alt="likes" class="heart-total" />`;
+
+
   header.appendChild(info);
   info.appendChild(h1);
   info.appendChild(location);
   info.appendChild(showTagline);
   header.appendChild(pictureContainer);
   pictureContainer.appendChild(img);
+}
+
+export function calcLikes(photographerMedias) {
+  const totalLikes = photographerMedias.reduce(
+    (acc, media) => acc + media.likes,
+    0
+  );
+  return totalLikes;
 }
