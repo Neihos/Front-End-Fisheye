@@ -205,11 +205,18 @@ form textarea {
 .photographerContent article .likes-container {
   display: flex;
   align-items: center;
-  gap: 5px;
   color: #901c1c;
 }
 
-.photographerContent article .likes-container  .heart-icon {
+.photographerContent article .likes-container .buttonHeart {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.photographerContent article .likes-container .buttonHeart .heart-icon {
   height: 15px;
 }
 

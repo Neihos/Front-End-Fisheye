@@ -2,7 +2,7 @@ import getPhotographers from "../api/api.js";
 import mediaTemplate from "../templates/media.js";
 import photographerTemplate from "../templates/photographer.js";
 import { setupLightbox, openLightbox } from "../utils/lightbox.js";
-import { calcLikes } from "../templates/photographerInfos.js";
+import { calcLikes, addLikes } from "../templates/photographerInfos.js";
 
 // On récupére l'id depuis l'url
 const params = new URLSearchParams(window.location.search);
@@ -50,6 +50,8 @@ async function displayData(photographers, media) {
     });
 
     setupLightbox(photographerMedias, folderName);
+    
+    addLikes();
   } else {
     console.error(`Aucun photographe trouvé avec l’ID : ${photographId}`);
     photographersContent.innerHTML = `<p class="error-message">Photographe introuvable.</p>`;

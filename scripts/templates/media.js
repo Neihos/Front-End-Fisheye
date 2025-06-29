@@ -24,13 +24,20 @@ export default function mediaTemplate(mediaData, folderName) {
     likesElement.className = "likes";
     likesElement.textContent = likes;
 
+    const buttonHeart = document.createElement("button");
+    buttonHeart.setAttribute("aria-label", "like button");
+    buttonHeart.className = "buttonHeart";
+
     const heartElement = document.createElement("img");
     heartElement.setAttribute("src", heartIconSrc);
-    heartElement.setAttribute("alt", "likes");
+    heartElement.setAttribute("alt", "");
+    heartElement.setAttribute("aria-hidden", "true")
     heartElement.className = "heart-icon";
 
     likesContainer.appendChild(likesElement);
-    likesContainer.appendChild(heartElement);
+    buttonHeart.appendChild(heartElement);
+    likesContainer.appendChild(buttonHeart);
+    
 
     // Assemblage
     article.appendChild(mediaElement);
