@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
@@ -9,7 +9,6 @@
   <link href="css/style.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
 
-  <script src="scripts/utils/contactForm.js" defer></script>
   <script type="module" src="scripts/pages/photographer.js" defer></script>
 </head>
 
@@ -17,14 +16,24 @@
   <header>
     <a href="./" role="link">
       <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page" />
-    </a>    
+    </a>
   </header>
   <main id="main" class="main-content">
     <section class="photograph-header">
       <button aria-label="Contact Me" class="contact_button" onclick="displayModal()">Contactez-moi</button>
     </section>
     <section class="photographerContent">
-      <!-- JS injectera ici les medias -->
+      <div class="sortOfMedia">
+        <label for="sort">Trier par </label>
+        <select id="sort">
+          <option value="popularity">Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
+        </select>
+      </div>
+      <div class="photographerMedias">
+        <!-- JS injectera ici les medias -->
+      </div>
     </section>
   </main>
   <div id="contact_modal">
@@ -34,7 +43,7 @@
         <button onclick="closeModal()" aria-label="Fermer la modale">
           <img src="assets/icons/close.svg" alt="" />
         </button>
-
+        
       </header>
       <form id="contact_form">
         <div>
@@ -84,7 +93,7 @@
     <span class="total-likes"></span>
     <span class="price"></span>
   </div>
-  
+
 
 </body>
 

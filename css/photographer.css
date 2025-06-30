@@ -178,14 +178,36 @@ form textarea {
 }
 
 .photographerContent {
+  padding: 0 100px;
+}
+
+.photographerContent .sortOfMedia {
+  padding: 50px 0;
+}
+
+.photographerContent .sortOfMedia label {
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 15px;
+}
+
+.photographerContent .sortOfMedia select {
+  background-color: #871818;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 15px;
+  border-radius: 5px 5px 0 0;
+}
+
+.photographerContent .photographerMedias {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px 100px;
-  padding: 100px;
   box-sizing: border-box;
 }
 
-.photographerContent article {
+.photographerContent .photographerMedias article {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -193,7 +215,7 @@ form textarea {
   color: rgba(144, 28, 28, 1);
 }
 
-.photographerContent article .media {
+.photographerContent .photographerMedias article .media {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
@@ -202,13 +224,13 @@ form textarea {
   cursor: pointer;
 }
 
-.photographerContent article .likes-container {
+.photographerContent .photographerMedias article .likes-container {
   display: flex;
   align-items: center;
   color: #901c1c;
 }
 
-.photographerContent article .likes-container .buttonHeart {
+.photographerContent .photographerMedias article .likes-container .buttonHeart {
   display: flex;
   align-items: center;
   background-color: transparent;
@@ -216,7 +238,7 @@ form textarea {
   cursor: pointer;
 }
 
-.photographerContent article .likes-container .buttonHeart .heart-icon {
+.photographerContent .photographerMedias article .likes-container .buttonHeart .heart-icon {
   height: 15px;
 }
 

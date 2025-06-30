@@ -17,7 +17,8 @@ export default function createMediaElement({
   showCloseupView = false,
 }) {
   let mediaElement;
-
+ 
+  // Vérification du type de média et création de l'élément approprié
   if (type === "image") {
     mediaElement = document.createElement("img");
     mediaElement.setAttribute("src", src);
@@ -37,6 +38,7 @@ export default function createMediaElement({
     throw new Error(`Type de média non supporté : ${type}`);
   }
 
+  // Ajout des classes et attributs communs
   mediaElement.className = "media";
   mediaElement.setAttribute("tabindex", "0");
 

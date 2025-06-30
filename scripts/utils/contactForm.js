@@ -1,4 +1,4 @@
-const modal = document.getElementById("contact_modal");
+const modal = document.querySelector("#contact_modal");
 const modalContainer = modal.querySelector(".modal");
 const main = document.querySelector(".main-content");
 
@@ -8,8 +8,7 @@ const main = document.querySelector(".main-content");
  * @function displayModal
  * @returns {void}
  */
-
-function displayModal() {
+export function displayModal() {
   modal.style.display = "flex";
   modalContainer.setAttribute("aria-hidden", "false");
   main.setAttribute("inert", ""); // bloque le focus et les interactions sur le reste
@@ -46,9 +45,9 @@ function onEscapeKey(e) {
  * @function closeModal
  * @returns {void}
  */
-function closeModal() {
-  if (document.activeElement && modal.contains(document.activeElement)) {
-    document.activeElement.blur(); // retire le focus actif
+export function closeModal() {
+  if (document.activeElement && modal.contains(document.activeElement)) { // vérifie si l'élément actif est dans la modale
+    document.activeElement.blur(); // retire le focus actif pour éviter les problèmes d'accessibilité
   }
 
   modal.style.display = "none";
@@ -62,7 +61,7 @@ function closeModal() {
  * @param {Object} data - Données du photographe
  * @returns {void}
  */
-function makeModal(data) {
+export function makeModal(data) {
   const { name } = data;
   const modalHeader = document.querySelector(".modal header");
   const photographerName = document.createElement("span");
@@ -71,18 +70,30 @@ function makeModal(data) {
   modalHeader.appendChild(photographerName);
 }
 
-document
-  .querySelector("#contact_form")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
-    const form = e.target;
-    const formData = new FormData(form);
+/**
+ * Initialise le formulaire de contact
+ * @returns {void}
+ */
+export function initContactForm() {
+  document
+    .querySelector("#contact_form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const formData = new FormData(form);
 
-    const values = {};
-    for (const [key, value] of formData.entries()) {
-      values[key] = value;
-    }
+      const values = {};
+      for (const [key, value] of formData.entries()) {
+        values[key] = value;
+      }
 
-    console.log("Contenu du formulaire :", values);
-    closeModal();
-  });
+      console.log("Contenu du formulaire :", values);
+      closeModal();
+    });
+}
+
+// Rendre les fonctions globales SEULEMENT pour les onclick dans photographer.html
+if (typeof window !== 'undefined') {
+window.displayModal = displayModal;
+window.closeModal = closeModal;
+}

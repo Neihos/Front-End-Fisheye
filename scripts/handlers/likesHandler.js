@@ -9,9 +9,11 @@
 export default function addLikes() {
   const buttons = document.querySelectorAll(".buttonHeart");
 
+  // Parcourt chaque bouton pour ajouter un gestionnaire d'événement
   buttons.forEach((button) => {
     let liked = false;
 
+    // Vérifie aussi si le bouton a déjà été liké grâce à la variable liked
     button.addEventListener("click", function () {
       const likeDisplay = this.parentElement.querySelector(".likes");
 

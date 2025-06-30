@@ -4,6 +4,8 @@ import photographerTemplate from "../templates/photographer.js";
 import { setupLightbox, openLightbox } from "../utils/lightbox.js";
 import addLikes from "../handlers/likesHandler.js";
 import calcLikes from "../utils/likesCalculator.js";
+import { sortingMedia } from "../utils/sortingMedia.js";
+import { makeModal, initContactForm } from "../utils/contactForm.js";
 
 // On récupére l'id depuis l'url
 const params = new URLSearchParams(window.location.search);
@@ -21,50 +23,75 @@ const photographId = parseInt(params.get("id"));
  * @returns {Promise<void>}
  */
 async function displayData(photographers, media) {
-  const photographersContent = document.querySelector(".photographerContent");
+  const photographersContent = document.querySelector(".photographerMedias");
 
   const photographer = photographers.find(
-    (photographer) => photographer.id === photographId
+    (photographer) => photographer.id === photographId // Filtre le photographe par ID
   );
 
   if (photographer) {
-    const folderName = photographer.name.split(" ")[0];
+    const folderName = photographer.name.split(" ")[0]; // Utilise le prénom du photographe pour le dossier des médias
 
-    const photographerMedias = media.filter(
-      (media) => media.photographerId === photographId
+    let photographerMedias = media.filter(
+      (media) => media.photographerId === photographId // Filtre les médias par ID de photographe
     );
+
+    makeModal(photographer);
+    initContactForm();
+
+    photographerMedias = sortingMedia(photographerMedias, "popularity"); // Tri initial des médias par popularité
 
     const total = calcLikes(photographerMedias);
 
-    const photographerModel = photographerTemplate(photographer);
-    photographerModel.makePhotographPage(total);
+    const photographerModel = photographerTemplate(photographer);  // Crée un modèle de page photographe
+    photographerModel.makePhotographPage(total); // Génère la page du photographe avec le total des likes
 
-    makeModal(photographer);
+    /**
+     * Affiche les médias à l'écran
+     * @param {Array} mediasToDisplay - Tableau des médias à afficher
+     * @function displayMedias
+     * @returns {void}
+     */
+    function displayMedias(mediasToDisplay) {
+      photographersContent.innerHTML = ""; // Vider le contenu
 
-    photographerMedias.forEach((mediaItem, index) => {
-      const mediaModel = mediaTemplate(mediaItem, folderName);
-      const mediaCard = mediaModel.getMediaCardDOM();
+      mediasToDisplay.forEach((mediaItem, index) => { // Parcourt chaque média
+        const mediaModel = mediaTemplate(mediaItem, folderName);
+        const mediaCard = mediaModel.getMediaCardDOM();
 
-      mediaCard.querySelector(".media").dataset.index = index;
+        mediaCard.querySelector(".media").dataset.index = index; // Ajoute l'index du média pour la lightbox
 
-      mediaCard.querySelector(".media").addEventListener("click", () => {
-        openLightbox(index, folderName);
-      });
-
-      mediaCard.querySelector(".media").addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
+        mediaCard.querySelector(".media").addEventListener("click", () => { // Ouvre la lightbox au clic et charge le média par rapport à l'index
           openLightbox(index, folderName);
-        }
+        });
+
+        mediaCard.querySelector(".media").addEventListener("keydown", (e) => { // Ouvre la lightbox avec la touche Entrée
+          if (e.key === "Enter") {
+            openLightbox(index, folderName);
+          }
+        });
+
+        photographersContent.appendChild(mediaCard);
       });
+    }
 
-      photographersContent.appendChild(mediaCard);
-    });
+    // Affiche les médias non triés
+    displayMedias(photographerMedias);
 
-    setupLightbox(photographerMedias, folderName);
-    
-    addLikes();
+    // Gestion du changement de tri
+    const sortSelect = document.querySelector("#sort");
+    if (sortSelect) {
+      sortSelect.addEventListener("change", (e) => {
+        const sortedMedias = sortingMedia(photographerMedias, e.target.value);
+        displayMedias(sortedMedias);
+        setupLightbox(sortedMedias, folderName); // Mettre à jour la lightbox
+      });
+    }
+
+    setupLightbox(photographerMedias, folderName); // Initialise la lightbox avec les médias du photographe
+    addLikes(); // Ajoute la logique de likes aux médias
   } else {
-    console.error(`Aucun photographe trouvé avec l’ID : ${photographId}`);
+    console.error(`Aucun photographe trouvé avec l'ID : ${photographId}`);
     photographersContent.innerHTML = `<p class="error-message">Photographe introuvable.</p>`;
   }
 }
@@ -79,8 +106,8 @@ async function displayData(photographers, media) {
  * @returns {Promise<void>}
  */
 async function init() {
-  const { photographers, media } = await getPhotographers();
-  displayData(photographers, media);
+  const { photographers, media } = await getPhotographers(); // Récupère les données des photographes et médias
+  displayData(photographers, media); // Affiche les données du photographe et ses médias
 }
 
 init();

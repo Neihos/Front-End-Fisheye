@@ -17,8 +17,8 @@ import makePhotographPage from "./photographerHeader.js";
  */
 function photographerTemplate(data) {
   return {
-    getUserCardDOM: () => getUserCardDOM(data),
-    makePhotographPage: (totalLikes) => makePhotographPage(data, totalLikes),
+    getUserCardDOM: () => getUserCardDOM(data), // Méthode pour obtenir la carte du photographe
+    makePhotographPage: (totalLikes) => makePhotographPage(data, totalLikes), // Méthode pour générer la page du photographe avec le total des likes
   };
 }
 
