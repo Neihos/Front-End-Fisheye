@@ -1,4 +1,17 @@
-// Méthode de création de la page index
+/**
+ * Template de création d'une carte utilisateur
+ * Génère un élément HTML article contenant les informations de l'utilisateur
+ *
+ * @function
+ * @param {Object} data - Données de l'utilisateur à afficher
+ * @param {string} data.name - Nom de l'utilisateur
+ * @param {string} data.portrait - Nom du fichier image du portrait
+ * @param {string} data.city - Ville de l'utilisateur
+ * @param {string} data.country - Pays de l'utilisateur
+ * @param {string} data.tagline - Slogan de l'utilisateur
+ * @param {number} data.price - Prix par jour de l'utilisateur
+ * @returns {HTMLElement} Élément HTML article représentant la carte utilisateur
+ */
 export default function getUserCardDOM(data) {
   const { name, portrait, city, country, tagline, price, id } = data;
 

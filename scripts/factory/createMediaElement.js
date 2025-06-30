@@ -1,9 +1,21 @@
 /**
  * Factory qui retourne un élément HTML selon le type de média (image ou vidéo)
- * @param {object} data - { type: 'image' | 'video', src: string, title: string }
- * @returns {HTMLElement}
+ *
+ * @param {object} data - Objet de configuration du média
+ * @param {'image'|'video'} data.type - Type de média à générer
+ * @param {string} data.src - Chemin vers le fichier du média
+ * @param {string} data.title - Titre pour accessibilité
+ * @param {boolean} [data.showControls=false] - Affiche les contrôles vidéo si true
+ * @param {boolean} [data.showCloseupView=false] - Utilise une vue rapprochée (modifie le alt)
+ * @returns {HTMLElement} Élément <img> ou <video> prêt à être inséré dans le DOM
  */
-export default function createMediaElement({ type, src, title, showControls = false, showCloseupView = false }) {
+export default function createMediaElement({
+  type,
+  src,
+  title,
+  showControls = false,
+  showCloseupView = false,
+}) {
   let mediaElement;
 
   if (type === "image") {
@@ -14,7 +26,6 @@ export default function createMediaElement({ type, src, title, showControls = fa
     } else {
       mediaElement.setAttribute("alt", `${title}, closeup view`);
     }
-    
   } else if (type === "video") {
     mediaElement = document.createElement("video");
     mediaElement.setAttribute("src", src);

@@ -1,3 +1,12 @@
+/** 
+* fonction displayData pour la page index
+* Récupère les données des photographes via l'API, puis crée et insère les cartes de chaque photographe dans le DOM.
+*
+* @function displayData
+* @async
+* @param {Array} photographers - Liste des photographes à afficher
+* @returns {Promise<void>}
+*/
 import getPhotographers from "../api/api.js";
 import photographerTemplate from "../templates/photographer.js";
 

@@ -1,4 +1,11 @@
-// Fonction asynchrone via fetch pour récupérer les données du fichier photographer.json
+/**
+ * Récupère les données des photographes et des médias depuis le fichier JSON.
+ * Utilise `fetch()` de manière asynchrone et gère les erreurs en retournant une structure vide en cas d’échec.
+ *
+ * @async
+ * @function getPhotographers
+ * @returns {Promise<{ photographers: object[], media: object[] }>} Un objet contenant deux tableaux : `photographers` et `media`
+ */
 export default async function getPhotographers() {
   try {
     const response = await fetch("./data/photographers.json");

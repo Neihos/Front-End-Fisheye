@@ -5,16 +5,35 @@ let mediaArray = [];
 const lightbox = document.querySelector("#lightbox");
 const main = document.querySelector("main");
 
+/**
+ * Masque la lightbox
+ * Réactive les interactions sur le reste de la page et retire la classe no-scroll du body
+ * @function hideLightbox
+ * @returns {void}
+ */
 function hideLightbox() {
   lightbox.style.display = "none";
   main.removeAttribute("inert");
   document.body.classList.remove("no-scroll");
 }
 
+/**
+ * Gère la fermeture de la lightbox avec la touche "Escape"
+ * @param {KeyboardEvent} e - L'événement de la touche
+ * @returns {void}
+ */
 function onKeydown(e) {
   if (e.key === "Escape") hideLightbox();
 }
 
+
+/**
+ * Configure la lightbox avec les médias et le nom du dossier
+ * @param {Array} medias - Liste des médias à afficher
+ * @param {string} folderName - Nom du dossier contenant les médias
+ * @function setupLightbox
+ * @returns {void}
+ */
 export function setupLightbox(medias, folderName) {
   mediaArray = medias;
   const cross = document.querySelector(".lightbox-close");
@@ -36,6 +55,13 @@ export function setupLightbox(medias, folderName) {
 
 }
 
+/**
+ * Ouvre la lightbox sur un média spécifique
+ * @param {number} index - L'index du média à afficher
+ * @param {string} folderName - Le nom du dossier contenant les médias
+ * @function openLightbox
+ * @returns {void}
+ */
 export function openLightbox(index, folderName) {
   currentMediaIndex = index;
   lightbox.style.display = "flex";
@@ -69,7 +95,5 @@ export function openLightbox(index, folderName) {
     showCloseupView: true
   });
   
-  content.appendChild(mediaNow);
-
-  
+  content.appendChild(mediaNow);  
 }

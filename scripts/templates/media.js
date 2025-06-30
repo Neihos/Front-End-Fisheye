@@ -1,5 +1,18 @@
 import createMediaElement from "../factory/createMediaElement.js";
 
+/**
+ * Template de création d'une carte média pour un photographe
+ * Génère un élément HTML article contenant le média, titre et système de likes
+ *
+ * @function
+ * @param {Object} mediaData - Données du média à afficher
+ * @param {string} mediaData.title - Titre du média
+ * @param {string} [mediaData.image] - Nom du fichier image (si c'est une image)
+ * @param {string} [mediaData.video] - Nom du fichier vidéo (si c'est une vidéo)
+ * @param {number} mediaData.likes - Nombre de likes du média
+ * @param {string} folderName - Nom du dossier contenant les médias du photographe
+ * @returns {Object} Objet contenant la méthode getMediaCardDOM() qui retourne un élément HTML article
+ */
 export default function mediaTemplate(mediaData, folderName) {
   const { title, image, video, likes } = mediaData;
   const mediaSrc = `assets/media/${folderName}/${image || video}`;

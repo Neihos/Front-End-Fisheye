@@ -1,5 +1,9 @@
-// Méthode de création du header de la page photographer
-export function makePhotographPage(data, totalLikes) {
+/**
+ * Fonction de création du header de la page photographer
+ * @param {Object} data - Données du photographe
+ * @param {number} totalLikes - Nombre total de likes
+ */
+export default function makePhotographPage(data, totalLikes) {
   const { name, portrait, city, country, tagline, price, id } = data;
   const picture = `./assets/photographers/${portrait}`;
 
@@ -39,36 +43,4 @@ export function makePhotographPage(data, totalLikes) {
   info.appendChild(showTagline);
   header.appendChild(pictureContainer);
   pictureContainer.appendChild(img);
-}
-
-export function calcLikes(photographerMedias) {
-  const totalLikes = photographerMedias.reduce(
-    (acc, media) => acc + media.likes,
-    0
-  );
-  return totalLikes;
-}
-
-export function addLikes() {
-  const buttons = document.querySelectorAll(".buttonHeart");
-
-  buttons.forEach((button) => {
-    let liked = false;
-
-    button.addEventListener("click", function () {
-      const likeDisplay = this.parentElement.querySelector(".likes");
-
-      if (!likeDisplay) return;
-
-      let currentLikes = parseInt(likeDisplay.textContent);
-
-      if (!liked) {
-        likeDisplay.textContent = currentLikes + 1;
-        liked = true;
-      } else {
-        likeDisplay.textContent = currentLikes - 1;
-        liked = false;
-      }
-    });
-  });
 }
