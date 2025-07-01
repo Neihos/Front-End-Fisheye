@@ -16,7 +16,6 @@ export default async function getPhotographers() {
 
     const data = await response.json();
 
-    // On retourne un objet avec une propriété photographers
     return {
       photographers: data.photographers,
       media: data.media,

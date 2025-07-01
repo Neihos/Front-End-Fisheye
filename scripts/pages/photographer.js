@@ -1,10 +1,10 @@
-import getPhotographers from "../api/api.js";
+import getPhotographers from "../data/dataPhotographer.js";
 import mediaTemplate from "../templates/media.js";
 import photographerTemplate from "../templates/photographer.js";
 import { setupLightbox, openLightbox } from "../utils/lightbox.js";
 import addLikes from "../handlers/likesHandler.js";
 import calcLikes from "../utils/likesCalculator.js";
-import { sortingMedia } from "../utils/sortingMedia.js";
+import { sortingMedia } from "../utils/mediaSort.js";
 import { makeModal, initContactForm } from "../utils/contactForm.js";
 
 // On récupére l'id depuis l'url
@@ -43,7 +43,7 @@ async function displayData(photographers, media) {
 
     const total = calcLikes(photographerMedias);
 
-    const photographerModel = photographerTemplate(photographer);  // Crée un modèle de page photographe
+    const photographerModel = photographerTemplate(photographer); // Crée un modèle de page photographe
     photographerModel.makePhotographPage(total); // Génère la page du photographe avec le total des likes
 
     /**
@@ -55,17 +55,20 @@ async function displayData(photographers, media) {
     function displayMedias(mediasToDisplay) {
       photographersContent.innerHTML = ""; // Vider le contenu
 
-      mediasToDisplay.forEach((mediaItem, index) => { // Parcourt chaque média
+      mediasToDisplay.forEach((mediaItem, index) => {
+        // Parcourt chaque média
         const mediaModel = mediaTemplate(mediaItem, folderName);
         const mediaCard = mediaModel.getMediaCardDOM();
 
         mediaCard.querySelector(".media").dataset.index = index; // Ajoute l'index du média pour la lightbox
 
-        mediaCard.querySelector(".media").addEventListener("click", () => { // Ouvre la lightbox au clic et charge le média par rapport à l'index
+        mediaCard.querySelector(".media").addEventListener("click", () => {
+          // Ouvre la lightbox au clic et charge le média par rapport à l'index
           openLightbox(index, folderName);
         });
 
-        mediaCard.querySelector(".media").addEventListener("keydown", (e) => { // Ouvre la lightbox avec la touche Entrée
+        mediaCard.querySelector(".media").addEventListener("keydown", (e) => {
+          // Ouvre la lightbox avec la touche Entrée
           if (e.key === "Enter") {
             openLightbox(index, folderName);
           }
