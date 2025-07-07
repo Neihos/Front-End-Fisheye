@@ -4,7 +4,7 @@ import photographerTemplate from "../templates/photographer.js";
 import { setupLightbox, openLightbox } from "../utils/lightbox.js";
 import addLikes from "../handlers/likesHandler.js";
 import calcLikes from "../utils/likesCalculator.js";
-import { sortingMedia } from "../utils/mediaSort.js";
+import { mediaSort } from "../utils/mediaSort.js";
 import { makeModal, initContactForm } from "../utils/contactForm.js";
 
 // On récupére l'id depuis l'url
@@ -39,7 +39,7 @@ async function displayData(photographers, media) {
     makeModal(photographer);
     initContactForm();
 
-    photographerMedias = sortingMedia(photographerMedias, "popularity"); // Tri initial des médias par popularité
+    photographerMedias = mediaSort(photographerMedias, "popularity"); // Tri initial des médias par popularité
 
     const total = calcLikes(photographerMedias);
 
@@ -76,22 +76,22 @@ async function displayData(photographers, media) {
 
         photographersContent.appendChild(mediaCard);
       });
+      setupLightbox(mediasToDisplay, folderName); // Mettre à jour la lightbox
     }
 
     // Affiche les médias non triés
     displayMedias(photographerMedias);
 
-    // Gestion du changement de tri
+    // Gestion du changement de tri et on ajoute le focus
     const sortSelect = document.querySelector("#sort");
+    sortSelect.focus(); // Met le focus sur le sélecteur de tri
     if (sortSelect) {
-      sortSelect.addEventListener("change", (e) => {
-        const sortedMedias = sortingMedia(photographerMedias, e.target.value);
+      sortSelect.onchange = (e) => {  
+        const sortedMedias = mediaSort(photographerMedias, e.target.value);
         displayMedias(sortedMedias);
-        setupLightbox(sortedMedias, folderName); // Mettre à jour la lightbox
-      });
+      };
     }
 
-    setupLightbox(photographerMedias, folderName); // Initialise la lightbox avec les médias du photographe
     addLikes(); // Ajoute la logique de likes aux médias
   } else {
     console.error(`Aucun photographe trouvé avec l'ID : ${photographId}`);

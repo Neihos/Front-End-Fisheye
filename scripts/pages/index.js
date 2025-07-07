@@ -1,3 +1,7 @@
+import getPhotographers from "../data/dataPhotographer.js";
+import photographerTemplate from "../templates/photographer.js";
+
+
 /**
  * fonction displayData pour la page index
  * Récupère les données des photographes via l'API, puis crée et insère les cartes de chaque photographe dans le DOM.
@@ -7,9 +11,6 @@
  * @param {Array} photographers - Liste des photographes à afficher
  * @returns {Promise<void>}
  */
-import getPhotographers from "../data/dataPhotographer.js";
-import photographerTemplate from "../templates/photographer.js";
-
 async function displayData(photographers) {
   const photographersSection = document.querySelector(".photographer_section");
 
@@ -21,9 +22,17 @@ async function displayData(photographers) {
   });
 }
 
+/**
+ * Initialise la page d'accueil
+ * Récupère les données des photographes et les affiche sur la page.
+ * @function init
+ * @async
+ * @return {Promise<void>}
+ */
 async function init() {
   const { photographers } = await getPhotographers(); // Récupère les données des photographes
   displayData(photographers); // Affiche les données des photographes
+  // console.log(photographers);
 }
 
 init();

@@ -179,6 +179,7 @@ form textarea {
 
 .photographerContent {
   padding: 0 100px;
+  padding-bottom: 70px;
 }
 
 .photographerContent .sortOfMedia {
@@ -215,6 +216,10 @@ form textarea {
   color: rgba(144, 28, 28, 1);
 }
 
+.photographerContent .photographerMedias article h3 {
+  font-size: 17px;
+}
+
 .photographerContent .photographerMedias article .media {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -240,6 +245,7 @@ form textarea {
 
 .photographerContent .photographerMedias article .likes-container .buttonHeart .heart-icon {
   height: 15px;
+  pointer-events: none;
 }
 
 .info-likes-price {
@@ -287,6 +293,7 @@ form textarea {
 
 #lightbox .lightbox-container .lightbox-content {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -300,6 +307,11 @@ form textarea {
   aspect-ratio: 1/1;
   max-width: 80vh;
   object-fit: cover;
+}
+
+#lightbox .lightbox-container .lightbox-content .media-title-container {
+  width: 100%;
+  color: #901c1c;
 }
 
 #lightbox .lightbox-container .lightbox-close {

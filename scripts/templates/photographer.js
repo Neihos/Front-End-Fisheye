@@ -13,7 +13,7 @@ import makePhotographPage from "./photographerHeader.js";
  * @param {string} data.country - Pays du photographe
  * @param {string} data.tagline - Slogan du photographe
  * @param {number} data.price - Prix par jour du photographe
- * @returns {Object} Objet contenant la méthode getUserCardDOM() qui retourne un élément HTML article
+ * @returns {Object} Objet contenant la méthode getUserCardDOM() qui retourne un élément HTML article et la méthode makePhotographPage() qui génère la page du photographe
  */
 function photographerTemplate(data) {
   return {

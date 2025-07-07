@@ -18,16 +18,6 @@ function hideLightbox() {
 }
 
 /**
- * Gère la fermeture de la lightbox avec la touche "Escape"
- * @param {KeyboardEvent} e - L'événement de la touche
- * @returns {void}
- */
-function onKeydown(e) {
-  if (e.key === "Escape") hideLightbox();
-}
-
-
-/**
  * Configure la lightbox avec les médias et le nom du dossier
  * @param {Array} medias - Liste des médias à afficher
  * @param {string} folderName - Nom du dossier contenant les médias
@@ -36,23 +26,47 @@ function onKeydown(e) {
  */
 export function setupLightbox(medias, folderName) {
   mediaArray = medias;
-  const cross = document.querySelector(".lightbox-close");
-  cross.addEventListener("click", hideLightbox);
-  document.addEventListener("keydown", onKeydown);
 
+  const cross = document.querySelector(".lightbox-close");
   const arrowPrev = document.querySelector(".lightbox-prev");
-  arrowPrev.addEventListener("click", () => {
+  const arrowNext = document.querySelector(".lightbox-next");
+
+  const closeLightbox = () => {
+    hideLightbox();
+  };
+  cross.onclick = closeLightbox;
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeLightbox();
+    }
+  });
+
+  const toPreviousMedia = () => {
     currentMediaIndex =
       (currentMediaIndex - 1 + mediaArray.length) % mediaArray.length;
     openLightbox(currentMediaIndex, folderName);
+  };
+
+  arrowPrev.onclick = toPreviousMedia;
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      toPreviousMedia();
+    }
   });
 
-  const arrowNext = document.querySelector(".lightbox-next");
-  arrowNext.addEventListener("click", () => {
+  const toNextMedia = () => {
     currentMediaIndex = (currentMediaIndex + 1) % mediaArray.length;
     openLightbox(currentMediaIndex, folderName);
-  });
+  };
 
+  arrowNext.onclick = toNextMedia;
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      toNextMedia();
+    }
+  });
 }
 
 /**
@@ -94,6 +108,15 @@ export function openLightbox(index, folderName) {
     showControls: true,
     showCloseupView: true
   });
+  const mediaTitleContainer = document.createElement("div");
+  mediaTitleContainer.className = "media-title-container";
+  const mediaTitle = document.createElement("h2");
+  mediaTitle.className = "media-title";
+  mediaTitle.textContent = title;
   
-  content.appendChild(mediaNow);  
+  content.appendChild(mediaNow);
+  content.appendChild(mediaTitleContainer);
+  mediaTitleContainer.appendChild(mediaTitle);
+  content.setAttribute("aria-label", title);
+  content.querySelector("video, img").setAttribute("aria-label", title);
 }

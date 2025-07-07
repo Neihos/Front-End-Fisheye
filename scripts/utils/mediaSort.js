@@ -6,7 +6,7 @@
  * @param {string} sortBy - Critère de tri ('popularity', 'date', 'title')
  * @returns {Array} Tableau trié des médias
  */
-export function sortingMedia(mediaArray, sortBy) {
+export function mediaSort(mediaArray, sortBy) {
   const sortedArray = [...mediaArray];
 
   switch (sortBy) {
