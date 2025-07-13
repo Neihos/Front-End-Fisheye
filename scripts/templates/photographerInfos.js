@@ -34,7 +34,7 @@ export default function makePhotographPage(data, totalLikes) {
   bottomPrice.innerHTML = `${price}€ / jour`;
 
   const showTotalLikes = document.querySelector(".total-likes");
-  showTotalLikes.innerHTML = `${totalLikes} <img src="assets/icons/blackheart.svg" alt="likes" class="heart-total" />`;
+  showTotalLikes.innerHTML = totalLikes;
 
 
   header.appendChild(info);

@@ -25,7 +25,7 @@
     <section class="photographerContent">
       <div class="sortOfMedia">
         <label for="sort">Trier par </label>
-        <select id="sort" tabindex="-1">
+        <select id="sort" tabindex="0">
           <option value="popularity">Popularité</option>
           <option value="date">Date</option>
           <option value="title">Titre</option>
@@ -90,7 +90,10 @@
   </div>
 
   <div class="info-likes-price">
-    <span class="total-likes"></span>
+    <div class="total-likes-container">
+      <span class="total-likes"></span>
+      <img src="assets/icons/blackheart.svg" alt="likes" class="heart-total" />
+    </div>
     <span class="price"></span>
   </div>
 

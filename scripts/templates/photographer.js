@@ -1,5 +1,5 @@
 import getUserCardDOM from "./userCard.js";
-import makePhotographPage from "./photographerHeader.js";
+import makePhotographPage from "./photographerInfos.js";
 
 /**
  * Template de création d'une carte photographe

@@ -264,7 +264,7 @@ form textarea {
   background-color: rgba(219, 136, 118, 1);
 }
 
-.info-likes-price .total-likes {
+.info-likes-price .total-likes-container {
   display: flex;
   align-items: center;
   gap: 7px;
