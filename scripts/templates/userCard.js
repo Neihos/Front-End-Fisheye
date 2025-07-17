@@ -19,6 +19,7 @@ export default function getUserCardDOM(data) {
 
   const article = document.createElement("article");
 
+  // Création du lien vers le profil de l'utilisateur
   const profileLink = document.createElement("a");
   profileLink.setAttribute("href", `./photographer.html?id=${id}`);
   profileLink.className = "profileLink";
@@ -27,26 +28,32 @@ export default function getUserCardDOM(data) {
   const wrapper = document.createElement("div");
   wrapper.className = "wrapper";
 
+  // Création de l'image du portrait de l'utilisateur
   const img = document.createElement("img");
   img.className = `portrait${id}`;
   img.setAttribute("src", picture);
   img.setAttribute("alt", `${name}`);
 
+  // Création du titre de la carte
   const h2 = document.createElement("h2");
   h2.textContent = name;
 
+  // Création des éléments pour afficher le prix
   const showPrice = document.createElement("p");
   showPrice.className = "price";
   showPrice.textContent = `${price}€/jour`;
 
+  // Création de la localisation
   const location = document.createElement("p");
   location.className = "location";
   location.textContent = `${city}, ${country}`;
 
+  // Création du slogan
   const showTagline = document.createElement("p");
   showTagline.className = "tagline";
   showTagline.textContent = tagline;
 
+  // Ajout des éléments créés à l'article
   article.appendChild(profileLink);
   profileLink.appendChild(wrapper);
   profileLink.appendChild(h2);

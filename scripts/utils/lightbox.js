@@ -77,6 +77,7 @@ export function setupLightbox(medias, folderName) {
  * @returns {void}
  */
 export function openLightbox(index, folderName) {
+  // Applique les styles pour afficher la lightbox
   currentMediaIndex = index;
   lightbox.style.display = "flex";
   main.setAttribute("inert", ""); // bloque le focus et les interactions sur le reste
@@ -87,6 +88,7 @@ export function openLightbox(index, folderName) {
 
   let fileName, mediaType;
 
+  // Vérifie si le média est une image ou une vidéo et crée l'élément approprié
   if (mediaLightbox.image) {
     fileName = mediaLightbox.image;
     mediaType = "image";
@@ -101,6 +103,7 @@ export function openLightbox(index, folderName) {
   const title = mediaLightbox.title;
 
   content.innerHTML = "";
+  // Crée l'élément média avec les propriétés appropriées
   const mediaNow = createMediaElement({
     type: mediaType,
     src: mediaSrc,
@@ -114,6 +117,7 @@ export function openLightbox(index, folderName) {
   mediaTitle.className = "media-title";
   mediaTitle.textContent = title;
   
+  // Ajoute l'élément média et le titre à la lightbox
   content.appendChild(mediaNow);
   content.appendChild(mediaTitleContainer);
   mediaTitleContainer.appendChild(mediaTitle);

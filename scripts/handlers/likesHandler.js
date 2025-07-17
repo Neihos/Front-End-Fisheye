@@ -20,6 +20,7 @@ export default function addLikes() {
         let currentTotalLikes = parseInt(totalLike.textContent);
         const liked = mediaElement.dataset.liked === "true";
 
+        // Vérifie si le média est déjà aimé
         if (!liked) {
           likeDisplay.textContent = currentLikes + 1;
           totalLike.textContent = currentTotalLikes + 1;
